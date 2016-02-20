@@ -18,8 +18,8 @@ STEPS
 1. 	Get a GENI machine using the content of the rspecs.xml file provided here: 
 		https://github.com/rollingcoconut/hadoopExprOnGeni.git
 	Alternatively, you can configure your machine according to the instructions provided below. 
+	http://groups.geni.net/geni/wiki/GENIExperimenter/Tutorials/jacks/HadoopInASlice/ObtainResources
 	The result is the same:
-		http://groups.geni.net/geni/wiki/GENIExperimenter/Tutorials/jacks/HadoopInASlice/ObtainResources
 
 2. 	SSH into your account on the master node of your machine. 
 	Note the ip address of the master node machine! 
