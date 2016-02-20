@@ -33,9 +33,9 @@ NOTE ON STEP 4: The script is interactive
 	You will be prompted to download the following linux tools:
 	bc, httpd (and dependencies), bzip2. 
 	You should download the tools for the experiment to work as expcted.
-	NOTE: You will also be asked if you want to start the machine's webserver. 
-		You should if you want to see your results optimized via HTTP, but it is not necessary.
-		You can always turn machines web server on by typing: 
+NOTE: You will also be asked if you want to start the machine's webserver. 
+	You should in order to see your results optimized in HTTP.
+	If you choose not to turn it on you can always turn it on later by typing: 
 			sudo serverice httpd start
 
 5. 	Become the hadoop user, cd to /home/hadoop, and execute hadoopStart.sh
