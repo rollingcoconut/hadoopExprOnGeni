@@ -61,3 +61,4 @@ here apples and alice to words beginning with the letter A.
 
 Entering keywords beginning with other letters will not return any results.  
 
+Finally, just go to your machines IP address to see your recommendations.
