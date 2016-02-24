@@ -27,16 +27,18 @@ chmod -R 777 /home/hadoop/AUX_FILES
 [[ $? -eq 0 ]] && echo "install.sh: HADOOP_EXPR_v2 moved successfully to /home/hadoop"
 
 #INSTALL NEEDED LINUX TOOLS
-echo -n "install.sh: Get  needed linux tools 'bzip2' and 'bc'? [y/n]: "
+echo -n "install.sh: Get  needed linux tools 'unzip' and 'bc'? [y/n]: "
 read  response
-[ "$response" = "y" ] &&  yum install bc bzip2
+[ "$response" = "y" ] &&  yum install bc unzip
 sleep 3
 
-#GET GUTENBERG CORPUS FILE
+#GET GUTENBERG WORD FREQUENCY FILE
 echo "install.sh: Moving Gutenberg file to /home/hadoop"
-echo "install.sh: Untarring Gutenberg file needed for exprStart.sh"
-sleep 3
-tar -xvf $(pwd)/AUX_FILES/stopNStemmedA.tar.bz2 -C /home/hadoop || echo "install.sh:Unable to move gutenberg file to /home/hadoop"
+echo "install.sh: Unzipping Gutenberg file needed for exprStart.sh"
+echo "install.sh: (this will take a while)"
+wget https://nyu.box.com/shared/static/kbzerbhp2mjktamvrmpiazikg58568ho.zip
+unzip -kbzerbhp2mjktamvrmpiazikg58568ho.zip
+mv hadoop/stopNStemmedAll /home/hadoop/stopNStemmedAll
 
 #GET INSTALL WEBSERVER
 echo "install.sh: Install webserver needed to view experiment results [y/n]?"
