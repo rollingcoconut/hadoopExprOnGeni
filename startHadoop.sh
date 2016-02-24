@@ -32,7 +32,7 @@ start-yarn.sh
 sleep 1
 echo "startHadoop.sh: Files will now be placed in HDFS" 
 cd /home/hadoop
-[[ -f /home/hadoop/x00 ]] && hadoop fs -put /home/hadoop/x00 /  
+[[ -f /home/hadoop/stopNStemmedAll ]] && hadoop fs -put /home/hadoop/stopNStemmedAll /  
 
 
 # EXPAND VIRTUAL MEMORY
