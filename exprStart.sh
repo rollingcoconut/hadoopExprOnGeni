@@ -60,19 +60,26 @@ yarn jar \
 
 
 #CREATE HTML PAGE
-cat $auxFolder/indexBeg.txt > $auxFolder/index.html
+read -d '' indexBeg<<"EOF"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <!-- Design by TEMPLATED http://templated.co Released for free under the Creative Commons Attribution License MODIFIED FOR GENI MOOC PROJECT  Name       : N/A Description: N/A Version    : 1.0 Released   : 20160203 --> <html xmlns="http://www.w3.org/1999/xhtml"> <head> <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <title></title> <meta name="keywords" content="" /> <meta name="description" content="" /> <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" /> <link href="default.css" rel="stylesheet" type="text/css" media="all" /> <link href="fonts.css" rel="stylesheet" type="text/css" media="all" /> <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]--> </head> <body> <div id="header-wrapper"> <div id="header" class="container"> <div id="logo"> <h1></span><font color="white">AN EXPERIMENT ON GENI: </h1><h2> A Hadoop Powered Book Recommendation System for <i>The Project Gutenberg </i> Corpus </font></h2> <!-- <h1></span><a href="#">EntryWay</a></h1> --> </div> </div> </div> <div id="header-featured"> <div id="elephant_banner" class="container"> </div> </div> <div id="wrapper"> <!-- <div id="featured-wrapper"> --> <!--<div id="featured" class="extra2 margin-btm container">  --> <!--<div class="main-title"> --> <table> <tr><th>Book</th><th>Relevance Score</th></tr> 
+EOF
+cat $indexBeg > $auxFolder/index.html
+
+read -d '' indexEND<<"EOF"
+</table> </br> <span class="byline">Scores are relative to either TF.IDF, or Term Frequency  algorithm</span> </div> </div>	  </div> </div> </div>   <div id="copyright" class="container"> <p>&copy; In collaboration with NYU-Tandon's GENI MOOC Project. All rights reserved. |  <a href=" https://www.flickr.com/photos/lmsantana/4670815292/in/photolist-87K9E9-hA2yZP-zbAfM-woXyb-ozC9Ym-qRLbcL-BvZYg-kmz5P5-67NFxz-2PJ8PE-2PDFXi-gTLzfZ-sMrw3-Q5kVp-59Nxjk-67ajaN-e6svuo-8UbZ8T-FJAz8-qwdUey-9qAAK4-6pSZEY-8HywJy-nfYoa-xQ9VX-fP8FzJ-aDEdmU-khHG9H-rVSRTV-7CQsWR-815zjn-DWU3r-6sqzPc-9CgKK2-9gvoT1-ke9gwQ-7VLtGQ-68qn8v-ubcVZ6-6CxwJQ-8ur4Pb-iggDgF-pztehv-6V1qP4-hR3c8i-vdsNA3-6FEEqE-dEXwip-fwYe1f-bNNaTB">Photo</a> by Lucas Santana /<a href="https://creativecommons.org/licenses/by/2.0/legalcode"> CC BY 2.0</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p> </div> </body> </html>   
+EOF
 
 #POPULATE HTML PAGE WITH FORMATTED MAPREDUCE JOB OUTPUT
-hadoop fs -cat /$outputFile/part-00000 | sort -r | head -10 | ./AUX_FILES/parseOutputMP_v2.py | uniq  | ./AUX_FILES/createHTMLpage.sh > $auxFolder/tempRes.html
+tempRes=$(hadoop fs -cat /$outputFile/part-00000 | sort -r | head -10 | ./AUX_FILES/parseOutputMP_v2.py | uniq  | ./AUX_FILES/createHTMLpage.sh)
+#hash=$(hadoop fs -cat /$outputFile/part-00000 | sort -r | head -10 | ./AUX_FILES/parseOutputMP_v2.py | uniq  | ./AUX_FILES/createHTMLpage.sh > $auxFolder/tempRes.html)
+
 
 #DID MAPREDUCE JOB RETURN ANYTHING
-if [[ ! -s $auxFolder/tempRes.html ]] ; then
-echo "<p>Sorry. No results found</p>" >  $auxFolder/tempRes.html
-fi 
+[ -z "$tempRes" ] && echo "<p>Sorry. No results found</p>" >  $tempRes
 
 #FINISH CREATING HTML PAGE
-cat $auxFolder/tempRes.html >> $auxFolder/index.html
-cat $auxFolder/indexEND.txt >> $auxFolder/index.html
+cat $tempRes >> $auxFolder/index.html
+cat $indexEND >> $auxFolder/index.html
 if [ $? -eq 0 ]; then echo "exprSTART: HTML PAGE CREATED" ; 
 else echo "SOMETHING WENT WRONG WHILE CREATING HTML PAGE...";  exit 1 ; fi
 
