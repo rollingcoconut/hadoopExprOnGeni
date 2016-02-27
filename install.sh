@@ -21,10 +21,6 @@ chmod -R 777  $(pwd)
 	cp  $(pwd)/restartYARN.sh /home/hadoop	
 	cp  $(pwd)/startHadoop.sh /home/hadoop	 
 	cp  $(pwd)/exprStart.sh /home/hadoop	 
-
-##############################
-#--->DOES THIS NEED TO BE 777#
-##############################
 chmod -R 777 /home/hadoop/AUX_FILES 
 [[ $? -ne 0 ]] || 
 		echo "install.sh: Please move HADOOP_EXPR_v2 directory to /home/hadoop manually
@@ -43,7 +39,6 @@ echo "install.sh: Unzipping Gutenberg file needed for exprStart.sh"
 echo "install.sh: (this will take a while)"
 wget https://nyu.box.com/shared/static/kbzerbhp2mjktamvrmpiazikg58568ho.zip
 unzip -kbzerbhp2mjktamvrmpiazikg58568ho.zip -d /home/hadoop
-#mv hadoop/stopNStemmedAll /home/hadoop/stopNStemmedAll
 
 #GET INSTALL WEBSERVER
 echo "install.sh: Installing webserver"
@@ -52,10 +47,8 @@ yum -y install httpd
 sleep 1
 
 #MOVE HTML FILES TO /VAR/WWW/HTML
-cp -r $(pwd)/templated-entryway/* /var/www/html || 
-	echo "install.sh: Something went wrong moving the directory containing CSS and HTML, $(pwd)/templated-entryway to /var/www/html" 
-chmod 777 /var/www/html/index.html || 
-	echo "install.sh: Something went wrong executing chmod 777 /var/html/www/index.html"
+cp -r $(pwd)/templated-entryway/* /var/www/html || echo "install.sh: Something went wrong moving the directory containing CSS and HTML, $(pwd)/templated-entryway to /var/www/html" 
+chmod 777 /var/www/html/index.html || echo "install.sh: Something went wrong executing chmod 777 /var/html/www/index.html"
 
 #START WEBSERVER
 echo  "install.sh:The webserver will be started."

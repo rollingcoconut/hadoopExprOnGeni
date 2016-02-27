@@ -36,9 +36,7 @@ if [[ -f /home/hadoop/hadoop/stopNStemmedAll ]] ; then hadoop fs -put /home/hado
 else echo "startHadoop.sh: The gutenberg word freq file was not moved successfully to HDFS. DO NOT RERUN THIS SCRIPT but move the needed file manually to HDFS."
 fi
 
-
 # EXPAND VIRTUAL MEMORY
-
 cat /home/hadoop/hadoop-2.7.1/etc/hadoop/yarn-site.xml | grep vmem
 if [[ $? -ne 0 ]] ; then  #VMEM has not been affected in config file, so change it 
 	cd /home/hadoop/hadoop-2.7.1/etc/hadoop/

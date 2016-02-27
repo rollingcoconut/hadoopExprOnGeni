@@ -26,7 +26,6 @@ if ! [[ $1 =~ $re ]] ; then
    echo "exprStart quit because factorToIncreaseInputSplit not integer. EX: ./exprStart.sh 1 frogs" ; exit 1
 fi
 
-
 #To enable the unix sort you need the right encoding
 export LC_NUMERIC=en_US.utf-8
 
@@ -56,7 +55,6 @@ yarn jar \
 	-D mapred.min.split.size=$finalInputFileSize \
 	-files ./AUX_FILES/mapper.py,./AUX_FILES/reducer.py,AUX_FILES/nltk.mod   -mapper "mapper.py $*"  -reducer reducer.py  \
 	-input /stopNStemmedAll -output  /$outputFile
-
 
 
 #CREATE HTML PAGE
@@ -92,8 +90,10 @@ if [ -d /var/www/html ]; then
 		echo "exprStart: INDEX.HTML ALREADY EXISTS! IT HAS BEEN WRITTEN OVER. ACCESS MAPREDUCE OUTPUT AT machineIP" 
 	fi
 	echo "exprStart: IN CASE YOU DO NOT HAVE A WEB SERVER RUNNING, HERE ARE YOUR RECOMMENDATIONS."
-	echo $tempRes
+	hadoop fs -cat /$outputFile/part-00000 | sort -r | head -10 | ./AUX_FILES/parseOutputMP_v2.py | uniq	
 fi
+
+#DELETE HDFS OUTPUT FILE
 hadoop fs -rm -r /$outputFile 
 
 #EXPERIMENT FUNCTIONALITY TO PRESENT NUMBER OF MAPS/REDUCES; NOT SUPPORTED IN V2
