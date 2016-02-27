@@ -32,7 +32,7 @@ export LC_NUMERIC=en_US.utf-8
 
 #DETERMINE SIZE of mapred.min.split.size by determining avg block size;
 #THE UNIX PROGRAM 'bc' must be installed 
-initInputFileSize=`hdfs fsck /x00 | grep avg. | grep -oP '(?<!\d)\d{6,}(?!\d)'`
+initInputFileSize=`hdfs fsck /stopNStemmedAll | grep avg. | grep -oP '(?<!\d)\d{6,}(?!\d)'`
 factor=$1
 finalInputFileSize=$(printf "%.0f" $(echo "$initInputFileSize*$factor" | bc -l))
 partic=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
@@ -55,7 +55,7 @@ yarn jar \
 	/home/hadoop/hadoop-2.7.1/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar    \
 	-D mapred.min.split.size=$finalInputFileSize \
 	-files ./AUX_FILES/mapper.py,./AUX_FILES/reducer.py,AUX_FILES/nltk.mod   -mapper "mapper.py $*"  -reducer reducer.py  \
-	-input /x00 -output  /$outputFile
+	-input /stopNStemmedAll -output  /$outputFile
 
 
 

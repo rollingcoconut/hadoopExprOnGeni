@@ -12,7 +12,6 @@
 ##################################################
 
 echo "install.sh: Hello, "$USER".  This install script will get your GENI machine ready to run a Hadoop powered experiment."
-sleep 4
 
 #MOVE EXPERIMENT FILES TO RIGHT PLACE AND CHANGE PERMISSIONS
 chmod -R 777  $(pwd)
@@ -21,47 +20,44 @@ chmod -R 777  $(pwd)
 	cp  $(pwd)/restartYARN.sh /home/hadoop	
 	cp  $(pwd)/startHadoop.sh /home/hadoop	 
 	cp  $(pwd)/exprStart.sh /home/hadoop	 
-
-##############################
-#--->DOES THIS NEED TO BE 777#
-##############################
 chmod -R 777 /home/hadoop/AUX_FILES 
-[[ $? -ne 0 ]] || 
+	if [[ $? -ne 0 ]] ; then 
 		echo "install.sh: Please move HADOOP_EXPR_v2 directory to /home/hadoop manually
-		Then restart install script. Remember the script must be run as superuser."
+		Then restart install script. Remember the script must be run as superuser."; exit 1 ; fi
 [[ $? -eq 0 ]] && echo "install.sh: HADOOP_EXPR_v2 moved successfully to /home/hadoop"
 
 #INSTALL NEEDED LINUX TOOLS
-echo "install.sh: Installing needed linux tools: bc, unzip"
-yum -y install bc unzip
-[[ $? -eq 0 ]] && echo "install.sh: Successfully installed bc, unzip from repository"
-sleep 2
+echo -n "install.sh: Get  needed linux tools 'bzip2' and 'bc'? [y/n]: "
+read  response
+[ "$response" = "y" ] &&  yum install bc bzip2
+sleep 3
 
-#GET GUTENBERG WORD FREQUENCY FILE
+#GET GUTENBERG CORPUS FILE
 echo "install.sh: Moving Gutenberg file to /home/hadoop"
-echo "install.sh: Unzipping Gutenberg file needed for exprStart.sh"
-echo "install.sh: (this will take a while)"
-wget https://nyu.box.com/shared/static/kbzerbhp2mjktamvrmpiazikg58568ho.zip
-unzip -kbzerbhp2mjktamvrmpiazikg58568ho.zip -d /home/hadoop
-#mv hadoop/stopNStemmedAll /home/hadoop/stopNStemmedAll
+echo "install.sh: Untarring Gutenberg file needed for exprStart.sh"
+sleep 3
+tar -xvf $(pwd)/AUX_FILES/stopNStemmedA.tar.bz2 -C /home/hadoop || echo "install.sh:Unable to move gutenberg file to /home/hadoop"
 
 #GET INSTALL WEBSERVER
-echo "install.sh: Installing webserver"
-yum -y install httpd
-[[ $? -eq 0 ]] && echo "install.sh: Successfully installed httpd and its dependencies from repository"
+echo "install.sh: Install webserver needed to view experiment results [y/n]?"
+read response
+if [ "$response" = "y" ] ; then 
+	yum update
+	yum install httpd
+fi 
+
 sleep 1
 
 #MOVE HTML FILES TO /VAR/WWW/HTML
-cp -r $(pwd)/templated-entryway/* /var/www/html || 
-	echo "install.sh: Something went wrong moving the directory containing CSS and HTML, $(pwd)/templated-entryway to /var/www/html" 
-chmod 777 /var/www/html/index.html || 
-	echo "install.sh: Something went wrong executing chmod 777 /var/html/www/index.html"
+cp -r $(pwd)/templated-entryway/* /var/www/html || echo "install.sh: Something went wrong moving the directory containing CSS and HTML, $(pwd)/templated-entryway to /var/www/html" 
+
+chmod 777 /var/www/html/index.html || echo "install.sh: Something went wrong executing chmod 777 /var/html/www/index.html"
 
 #START WEBSERVER
-echo  "install.sh:The webserver will be started."
-service httpd start
-echo  "install.sh: Webserver started on this VM"
-sleep 1
+echo -n  "The webserver will be started. If you do not want to do this, type n, otherwise just press [ENTER]"
+read response
+[ "$response" = "n" ]  || service httpd start
+
 
 #TELL USER SCRIPT DONE
 echo "install.sh: Script done. Now please run do the following: 

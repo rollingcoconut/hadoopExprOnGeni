@@ -32,9 +32,7 @@ start-yarn.sh
 sleep 1
 echo "startHadoop.sh: Files will now be placed in HDFS" 
 cd /home/hadoop
-if [[ -f /home/hadoop/hadoop/stopNStemmedAll ]] ; then hadoop fs -put /home/hadoop/hadoop/stopNStemmedAll  /
-else echo "startHadoop.sh: The gutenberg word freq file was not moved successfully to HDFS. DO NOT RERUN THIS SCRIPT but move the needed file manually to HDFS."
-fi
+[[ -f /home/hadoop/x00 ]] && hadoop fs -put /home/hadoop/x00 /  
 
 
 # EXPAND VIRTUAL MEMORY

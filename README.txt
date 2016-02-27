@@ -1,6 +1,14 @@
 Feb. 20, 2016
 A HADOOP POWERED EXPERIMENT ON GENI! 
 
+
+MAKE THESES COMMENTS: Stuck at 0 0 if route errora
+-what to do it cancel job
+
+
+
+
+
 ##################################################
 GETTING STARTED: FOR THE GENI RESEARCHER
 ##################################################
