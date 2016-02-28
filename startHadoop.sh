@@ -23,7 +23,17 @@ Get to where you need to be then re-run the script.
 read response
 [ "$response" != "y" ] &&  exit 1 
 
+cd /home/hadoop/hadoop-2.7.1/etc/hadoop/
+read -d '' line<<"EOF"
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="configuration.xsl"?><configuration><property><name>dfs.replication</name><value>1</value></property><property><name>dfs.name.dir</name><value>file:///home/hadoop/hadoopdata/hdfs/namenode</value></property><property><name>dfs.data.dir</name><value>file:///home/hadoop/hadoopdata/hdfs/datanode</value></property></configuration>
+EOF
+echo $line > hdfs-site.xml
+
+( [[ $? -eq 0 ]] && echo "startHadoops.sh: Replication factor changed to 1. DO NOT RE-RUN THIS SCRIPT" ) || echo "startHadoop.sh:Replication factor at hdfs-site.xml was not successfully modified."
+
 sleep 3
+
+cd /home/hadoop
 hdfs namenode -format
 start-dfs.sh
 start-yarn.sh
@@ -31,12 +41,11 @@ start-yarn.sh
 # PLACE PARTIAL GUTENBERG FILE IN HDFS
 sleep 1
 echo "startHadoop.sh: Files will now be placed in HDFS" 
-cd /home/hadoop
 if [[ -f /home/hadoop/hadoop/stopNStemmedAll ]] ; then hadoop fs -put /home/hadoop/hadoop/stopNStemmedAll  /
 else echo "startHadoop.sh: The gutenberg word freq file was not moved successfully to HDFS. DO NOT RERUN THIS SCRIPT but move the needed file manually to HDFS."
 fi
 
-# EXPAND VIRTUAL MEMORY AND REDUCE REPLICATION FACTOR
+# EXPAND VIRTUAL MEMORY 
 cat /home/hadoop/hadoop-2.7.1/etc/hadoop/yarn-site.xml | grep vmem
 if [[ $? -ne 0 ]] ; then  #VMEM has not been affected in config file, so change it 
 	cd /home/hadoop/hadoop-2.7.1/etc/hadoop/
@@ -85,13 +94,6 @@ fi
 ( [[ $? -eq 0 ]] && echo "Mapred Memory successfully expanded. DO NOT RE-RUN THIS SCRIPT" ) || echo "startHadoop.sh:Memory was not successfully expanded and the experiment will not work"
 
 
-cd /home/hadoop/hadoop-2.7.1/etc/hadoop/
-read -d '' line<<"EOF"
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="configuration.xsl"?><configuration><property><name>dfs.replication</name><value>1</value></property><property><name>dfs.name.dir</name><value>file:///home/hadoop/hadoopdata/hdfs/namenode</value></property><property><name>dfs.data.dir</name><value>file:///home/hadoop/hadoopdata/hdfs/datanode</value></property></configuration>
-EOF
-echo $line > hdfs-site.xml
-
-( [[ $? -eq 0 ]] && echo "startHadoops.sh: Replication factor changed to 1. DO NOT RE-RUN THIS SCRIPT" ) || echo "startHadoop.sh:Replication factor at hdfs-site.xml was not successfully modified."
 
 # SCRIPT GOODBYE 
 echo " ###########################################
