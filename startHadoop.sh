@@ -36,7 +36,7 @@ if [[ -f /home/hadoop/hadoop/stopNStemmedAll ]] ; then hadoop fs -put /home/hado
 else echo "startHadoop.sh: The gutenberg word freq file was not moved successfully to HDFS. DO NOT RERUN THIS SCRIPT but move the needed file manually to HDFS."
 fi
 
-# EXPAND VIRTUAL MEMORY
+# EXPAND VIRTUAL MEMORY AND REDUCE REPLICATION FACTOR
 cat /home/hadoop/hadoop-2.7.1/etc/hadoop/yarn-site.xml | grep vmem
 if [[ $? -ne 0 ]] ; then  #VMEM has not been affected in config file, so change it 
 	cd /home/hadoop/hadoop-2.7.1/etc/hadoop/
@@ -84,6 +84,13 @@ fi
 
 ( [[ $? -eq 0 ]] && echo "Mapred Memory successfully expanded. DO NOT RE-RUN THIS SCRIPT" ) || echo "startHadoop.sh:Memory was not successfully expanded and the experiment will not work"
 
+
+cd /home/hadoop/hadoop-2.7.1/etc/hadoop/
+line="<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="configuration.xsl"?><configuration><property><name>dfs.replication</name><value>2</value></property><property><name>dfs.name.dir</name><value>file:///home/hadoop/hadoopdata/hdfs/namenode</value></property><property><name>dfs.data.dir</name><value>file:///home/hadoop/hadoopdata/hdfs/datanode</value></property></configuration>"
+echo $line >> hdfs-site.xml
+
+
+( [[ $? -eq 0 ]] && echo "startHadoops.sh: Replication factor changed to 1. DO NOT RE-RUN THIS SCRIPT" ) || echo "startHadoop.sh:Replication factor at hdfs-site.xml was not successfully modified."
 
 # SCRIPT GOODBYE 
 echo " ###########################################
