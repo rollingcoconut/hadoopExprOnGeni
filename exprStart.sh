@@ -64,9 +64,15 @@ read -d '' indexBeg<<"EOF"
 EOF
 echo $indexBeg > $auxFolder/index.html
 
+#read -d '' indexEND<<"EOF"
+#</table> </br> <span class="byline">Scores are relative to either TF.IDF, or Term Frequency  algorithm</span> </div> </div>	  </div> </div> </div>   <div id="copyright" class="container"> <p>&copy; In collaboration with NYU-Tandon's GENI MOOC Project. All rights reserved. |  <a href=" https://www.flickr.com/photos/lmsantana/4670815292/in/photolist-87K9E9-hA2yZP-zbAfM-woXyb-ozC9Ym-qRLbcL-BvZYg-kmz5P5-67NFxz-2PJ8PE-2PDFXi-gTLzfZ-sMrw3-Q5kVp-59Nxjk-67ajaN-e6svuo-8UbZ8T-FJAz8-qwdUey-9qAAK4-6pSZEY-8HywJy-nfYoa-xQ9VX-fP8FzJ-aDEdmU-khHG9H-rVSRTV-7CQsWR-815zjn-DWU3r-6sqzPc-9CgKK2-9gvoT1-ke9gwQ-7VLtGQ-68qn8v-ubcVZ6-6CxwJQ-8ur4Pb-iggDgF-pztehv-6V1qP4-hR3c8i-vdsNA3-6FEEqE-dEXwip-fwYe1f-bNNaTB">Photo</a> by Lucas Santana /<a href="https://creativecommons.org/licenses/by/2.0/legalcode"> CC BY 2.0</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p> </div> </body> </html>   
+#EOF
+
 read -d '' indexEND<<"EOF"
-</table> </br> <span class="byline">Scores are relative to either TF.IDF, or Term Frequency  algorithm</span> </div> </div>	  </div> </div> </div>   <div id="copyright" class="container"> <p>&copy; In collaboration with NYU-Tandon's GENI MOOC Project. All rights reserved. |  <a href=" https://www.flickr.com/photos/lmsantana/4670815292/in/photolist-87K9E9-hA2yZP-zbAfM-woXyb-ozC9Ym-qRLbcL-BvZYg-kmz5P5-67NFxz-2PJ8PE-2PDFXi-gTLzfZ-sMrw3-Q5kVp-59Nxjk-67ajaN-e6svuo-8UbZ8T-FJAz8-qwdUey-9qAAK4-6pSZEY-8HywJy-nfYoa-xQ9VX-fP8FzJ-aDEdmU-khHG9H-rVSRTV-7CQsWR-815zjn-DWU3r-6sqzPc-9CgKK2-9gvoT1-ke9gwQ-7VLtGQ-68qn8v-ubcVZ6-6CxwJQ-8ur4Pb-iggDgF-pztehv-6V1qP4-hR3c8i-vdsNA3-6FEEqE-dEXwip-fwYe1f-bNNaTB">Photo</a> by Lucas Santana /<a href="https://creativecommons.org/licenses/by/2.0/legalcode"> CC BY 2.0</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p> </div> </body> </html>   
+</table> </br> <span class="byline">Scores are relative to either TF.IDF, or Term Frequency  algorithm</span> </div> </div>   </div> </div> </div>   <div id="copyright" class="container"> <p>&copy; In collaboration with NYU-Tandon's GENI MOOC Project.  <a href="https://creativecommons.org/licenses/by/2.0/legalcode"> CC BY 2.0</a> |  <a href=" https://www.flickr.com/photos/lmsantana/4670815292/in/photolist-87K9E9-hA2yZP-zbAfM-woXyb-ozC9Ym-qRLbcL-BvZYg-kmz5P5-67NFxz-2PJ8PE-2PDFXi-gTLzfZ-sMrw3-Q5kVp-59Nxjk-67ajaN-e6svuo-8UbZ8T-FJAz8-qwdUey-9qAAK4-6pSZEY-8HywJy-nfYoa-xQ9VX-fP8FzJ-aDEdmU-khHG9H-rVSRTV-7CQsWR-815zjn-DWU3r-6sqzPc-9CgKK2-9gvoT1-ke9gwQ-7VLtGQ-68qn8v-ubcVZ6-6CxwJQ-8ur4Pb-iggDgF-pztehv-6V1qP4-hR3c8i-vdsNA3-6FEEqE-dEXwip-fwYe1f-bNNaTB">Photo</a> by Lucas Santana /<a href="https://creativecommons.org/licenses/by/2.0/legalcode"> CC BY 2.0</a> | Design by <a href="http://templated.co/entryway" rel="nofollow">TEMPLATED</a>.</p> </div> </body> </html>   
 EOF
+
+
 
 #POPULATE HTML PAGE WITH FORMATTED MAPREDUCE JOB OUTPUT
 tempRes=$(hadoop fs -cat /$outputFile/part-00000 | sort -r | head -10 | ./AUX_FILES/parseOutputMP_v2.py | uniq  | ./AUX_FILES/createHTMLpage.sh)
