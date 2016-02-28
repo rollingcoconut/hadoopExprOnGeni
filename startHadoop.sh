@@ -27,7 +27,7 @@ read -d '' line<<"EOF"
 EOF
 echo $line > hdfs-site.xml
 
-( [[ $? -eq 0 ]] && echo "startHadoops.sh: Replication factor changed to 1. DO NOT RE-RUN THIS SCRIPT" ) || echo "startHadoop.sh:Replication factor at hdfs-site.xml was not successfully modified."
+( [[ $? -eq 0 ]] && echo "startHadoops.sh: Replication factor changed to 1.  **do not re-run this script**" ) || echo "startHadoop.sh:Replication factor at hdfs-site.xml was not successfully modified."
 
 sleep 3
 
@@ -41,7 +41,7 @@ start-yarn.sh
 sleep 1
 echo "startHadoop.sh: Files will now be placed in HDFS" 
 if [[ -f /home/hadoop/hadoop/stopNStemmedAll ]] ; then hadoop fs -put /home/hadoop/hadoop/stopNStemmedAll  /
-else echo "startHadoop.sh: The gutenberg word freq file was not moved successfully to HDFS. DO NOT RERUN THIS SCRIPT but move the needed file manually to HDFS."
+else echo "startHadoop.sh: The gutenberg word freq file was not moved successfully to HDFS.  **do not rerun this script but move the needed file manually to HDFS**"
 fi
 
 # EXPAND VIRTUAL MEMORY 
@@ -62,7 +62,7 @@ sed  -i '$d' yarn-site.xml
 echo $line >> yarn-site.xml 
 fi 
 
-( [[ $? -eq 0 ]] && echo "Yarn Memory successfully expanded. DO NOT RE-RUN THIS SCRIPT" ) || echo "startHadoop.sh:Memory was not successfully expanded and the experiment will not work"
+( [[ $? -eq 0 ]] && echo "Yarn Memory successfully expanded.  **do not re-run this script** " ) || echo "startHadoop.sh:Memory was not successfully expanded and the experiment will not work"
 
 
 cat /home/hadoop/hadoop-2.7.1/etc/hadoop/mapred-site.xml | grep memory
