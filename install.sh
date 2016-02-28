@@ -42,6 +42,7 @@ unzip kbzerbhp2mjktamvrmpiazikg58568ho.zip -d /home/hadoop
 
 #GET INSTALL WEBSERVER
 echo "install.sh: Installing webserver"
+yum check-update
 yum -y install httpd
 [[ $? -eq 0 ]] && echo "install.sh: Successfully installed httpd and its dependencies from repository"
 sleep 1
