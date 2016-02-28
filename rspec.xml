@@ -1,11 +1,13 @@
 <rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
-<node xmlns="http://www.geni.net/resources/rspec/3" client_id="master">
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="master" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am">
 <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="http://hypertable.com/uploads/hadoop.png"/>
 <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="XOSmall">
 <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="http://geni-images.renci.org/images/standard/hadoop/Hadoop-Centos7-v0.2/hadoop-centos7.v0.2.xml" version="f31679d94e66bbd67e4e72115c720d75919b710b"/>
 </sliver_type>
 <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="orca-vm-cloud"/>
 <services xmlns="http://www.geni.net/resources/rspec/3">
+
+
 
 
 <execute xmlns="http://www.geni.net/resources/rspec/3" command="/home/hadoop/hadoop_config_dynamic.sh 2" shell="/bin/sh"/>
@@ -15,15 +17,17 @@
 <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-2">
 <ip xmlns="http://www.geni.net/resources/rspec/3" address="172.16.1.1" type="ipv4" netmask="255.255.255.0"/>
 </interface>
-<site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="Site 1"/>
+
 </node>
-<node xmlns="http://www.geni.net/resources/rspec/3" client_id="worker-0">
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="worker-0" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am">
 <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="http://dev.bowdenweb.com/a/fonts/symbols/pictonic/imgs/black/256/dbs-hadoop.png"/>
 <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="XOSmall">
 <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="http://geni-images.renci.org/images/standard/hadoop/Hadoop-Centos7-v0.2/hadoop-centos7.v0.2.xml" version="f31679d94e66bbd67e4e72115c720d75919b710b"/>
 </sliver_type>
 <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="orca-vm-cloud"/>
 <services xmlns="http://www.geni.net/resources/rspec/3">
+
+
 
 
 <execute xmlns="http://www.geni.net/resources/rspec/3" command="/home/hadoop/hadoop_config_dynamic.sh 20" shell="/bin/sh"/>
@@ -32,15 +36,17 @@
 <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-0">
 <ip xmlns="http://www.geni.net/resources/rspec/3" address="172.16.1.10" type="ipv4" netmask="255.255.255.0"/>
 </interface>
-<site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="Site 1"/>
+
 </node>
-<node xmlns="http://www.geni.net/resources/rspec/3" client_id="worker-1">
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="worker-1" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am">
 <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="http://dev.bowdenweb.com/a/fonts/symbols/pictonic/imgs/black/256/dbs-hadoop.png"/>
 <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="XOSmall">
 <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="http://geni-images.renci.org/images/standard/hadoop/Hadoop-Centos7-v0.2/hadoop-centos7.v0.2.xml" version="f31679d94e66bbd67e4e72115c720d75919b710b"/>
 </sliver_type>
 <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="orca-vm-cloud"/>
 <services xmlns="http://www.geni.net/resources/rspec/3">
+
+
 
 
 <execute xmlns="http://www.geni.net/resources/rspec/3" command="/home/hadoop/hadoop_config_dynamic.sh 20" shell="/bin/sh"/>
@@ -49,31 +55,15 @@
 <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-1">
 <ip xmlns="http://www.geni.net/resources/rspec/3" address="172.16.1.11" type="ipv4" netmask="255.255.255.0"/>
 </interface>
-<site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="Site 1"/>
-</node>
-<node xmlns="http://www.geni.net/resources/rspec/3" client_id="worker-2">
-<icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="http://dev.bowdenweb.com/a/fonts/symbols/pictonic/imgs/black/256/dbs-hadoop.png"/>
-<sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="XOSmall">
-<disk_image xmlns="http://www.geni.net/resources/rspec/3" name="http://geni-images.renci.org/images/standard/hadoop/Hadoop-Centos7-v0.2/hadoop-centos7.v0.2.xml" version="f31679d94e66bbd67e4e72115c720d75919b710b"/>
-</sliver_type>
-<hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="orca-vm-cloud"/>
-<services xmlns="http://www.geni.net/resources/rspec/3">
 
-
-<execute xmlns="http://www.geni.net/resources/rspec/3" command="/home/hadoop/hadoop_config_dynamic.sh 20" shell="/bin/sh"/>
-<install xmlns="http://www.geni.net/resources/rspec/3" url="http://geni-images.renci.org/images/tutorials/GENI-hadoop/hadoop_config_dynamic.sh.tgz" install_path="/home/hadoop/"/>
-</services>
-<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-3">
-<ip xmlns="http://www.geni.net/resources/rspec/3" address="172.16.1.12" type="ipv4" netmask="255.255.255.0"/>
-</interface>
-<site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="Site 1"/>
 </node>
 <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-0">
 <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-0"/>
 <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-1"/>
 <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-2"/>
-<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-3"/>
 
-<site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="undefined"/>
+
+
+<component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am"/>
 </link>
 </rspec>
