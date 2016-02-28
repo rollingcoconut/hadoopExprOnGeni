@@ -6,32 +6,9 @@
 </sliver_type>
 <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="orca-vm-cloud"/>
 <services xmlns="http://www.geni.net/resources/rspec/3">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <execute xmlns="http://www.geni.net/resources/rspec/3" command="/home/hadoop/hadoop_config_dynamic.sh 3" shell="/bin/sh"/>
 <install xmlns="http://www.geni.net/resources/rspec/3" url="http://geni-images.renci.org/images/tutorials/GENI-hadoop/hadoop_config_dynamic.sh.tgz" install_path="/home/hadoop/"/>
 </services>
-
 <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="Site 1"/>
 <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-1">
 <ip xmlns="http://www.geni.net/resources/rspec/3" address="172.16.1.1" type="ipv4" netmask="255.255.255.0"/>
@@ -45,32 +22,9 @@
 </sliver_type>
 <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="orca-vm-cloud"/>
 <services xmlns="http://www.geni.net/resources/rspec/3">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <execute xmlns="http://www.geni.net/resources/rspec/3" command="/home/hadoop/hadoop_config_dynamic.sh 20" shell="/bin/sh"/>
 <install xmlns="http://www.geni.net/resources/rspec/3" url="http://geni-images.renci.org/images/tutorials/GENI-hadoop/hadoop_config_dynamic.sh.tgz" install_path="/home/hadoop/"/>
 </services>
-
 <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="Site 1"/>
 <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-2">
 <ip xmlns="http://www.geni.net/resources/rspec/3" address="172.16.1.10" type="ipv4" netmask="255.255.255.0"/>
@@ -83,32 +37,9 @@
 </sliver_type>
 <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="orca-vm-cloud"/>
 <services xmlns="http://www.geni.net/resources/rspec/3">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <execute xmlns="http://www.geni.net/resources/rspec/3" command="/home/hadoop/hadoop_config_dynamic.sh 20" shell="/bin/sh"/>
 <install xmlns="http://www.geni.net/resources/rspec/3" url="http://geni-images.renci.org/images/tutorials/GENI-hadoop/hadoop_config_dynamic.sh.tgz" install_path="/home/hadoop/"/>
 </services>
-
 <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="Site 1"/>
 <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-3">
 <ip xmlns="http://www.geni.net/resources/rspec/3" address="172.16.1.11" type="ipv4" netmask="255.255.255.0"/>
@@ -121,32 +52,9 @@
 </sliver_type>
 <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="orca-vm-cloud"/>
 <services xmlns="http://www.geni.net/resources/rspec/3">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <execute xmlns="http://www.geni.net/resources/rspec/3" command="/home/hadoop/hadoop_config_dynamic.sh 20" shell="/bin/sh"/>
 <install xmlns="http://www.geni.net/resources/rspec/3" url="http://geni-images.renci.org/images/tutorials/GENI-hadoop/hadoop_config_dynamic.sh.tgz" install_path="/home/hadoop/"/>
 </services>
-
 <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="Site 1"/>
 <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-0">
 <ip xmlns="http://www.geni.net/resources/rspec/3" address="172.16.1.12" type="ipv4" netmask="255.255.255.0"/>
