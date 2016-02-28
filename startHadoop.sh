@@ -9,9 +9,7 @@
 #		2) Place  file in HDFS
 ##################################################
 
-echo "Are you in /home/hadoop and are you hadoop@master? 
-If you have just run install.sh and executed the 3 commands listed at the end, just continue: 
-#GET HADOOP STARTED
+echo "startHadoop.sh:If you have just run install.sh and executed the 3 commands listed at the end, just continue: 
 	# When you do run the script, you'll know your Hadoop environment is configured when you see: 
 	#/************************************************************
 	#SHUTDOWN_MSG: Shutting down NameNode at master/172.16.1.1
