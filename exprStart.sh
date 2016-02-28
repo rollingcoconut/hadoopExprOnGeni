@@ -46,7 +46,7 @@ outputFileDNE=$?         	# GET EXIT CODE FORM testDate
 if [ $outputFileDNE -ne 0 ] ; then
         echo "exprStart:Someone starting prgm at same second. Try again" ; exit 1
 fi
-echo "exprStart: PROGRAM WILL NOW EXECUTE HADOOP MAPREDUCE JOB" 
+echo "exprStart: program will now execute hadoop mapreduce job" 
 echo "exprStart: input split size is: " $initInputFileSize 
 echo "exprStart: mapred.min.split.size is " $finalInputFileSize 
 
@@ -93,10 +93,10 @@ if [ -d /var/www/html ]; then
 	if [  -f /var/www/html/index.html ]; then
 		cp $auxFolder/index.html /var/www/html/index.html
 		ret=$?
-		if [ $ret -ne 0 ] ; then echo "SOMETHING WENT WRONG MOVING FILE TO /VAR/WWW/HTML..." ; fi
-		echo "exprStart: INDEX.HTML ALREADY EXISTS! IT HAS BEEN WRITTEN OVER. ACCESS MAPREDUCE OUTPUT AT machineIP" 
+		if [ $ret -ne 0 ] ; then echo " something went wrong moving file to /var/www/html..." ; fi
+		echo "exprStart: index.html already exists! it has been written over. access mapreduce output at MACHINEip" 
 	fi
-	echo "exprStart: IN CASE YOU DO NOT HAVE A WEB SERVER RUNNING, HERE ARE YOUR RECOMMENDATIONS."
+	echo "exprStart: in case you do not have a web server running, here are your recommendations."
 	hadoop fs -cat /$outputFile/part-00000 | sort -r | head -10 | ./AUX_FILES/parseOutputMP_v2.py | uniq	
 fi
 
