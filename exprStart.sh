@@ -8,13 +8,14 @@
 #       words should not be repeated
 ########################################
 
-echo "exprStart:YOU ARE RUNNING THE BOOK REC SYSTEM WITH THE TERM FREQ ALGORITHM."
+echo "exprStart: You are running the book rec system with the term freq algorithm."
 
 auxFolder=$(pwd)/AUX_FILES   # 	PATH TO AUX_FILES 
 
 #Test input for punctuation, upper-cases, arg. length, factorToIncreaseInputSplitRange
 #$(pwd)/AUX_FILES/testInputBash $*
-$auxFolder/testInputBash.sh $*
+#$auxFolder/testInputBash.sh $*
+
 ret=$?
 if [ $ret -ne 0 ] ; then
         echo "exprStart: quit because of either input's syntax, length; or factorRange not number.  EX: ./exprStart.sh 1 frogs" ; exit 1

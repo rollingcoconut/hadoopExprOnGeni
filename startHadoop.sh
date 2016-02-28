@@ -9,9 +9,8 @@
 #		2) Place  file in HDFS
 ##################################################
 
-echo "Are you in /home/hadoop and are you hadoop@master? Do not execute the script unless you are. 
-Get to where you need to be then re-run the script. 
-(If you have just run install.sh, and executed the 3 commands listed at the end, you are where you need to be and can continue.)
+echo "Are you in /home/hadoop and are you hadoop@master? 
+If you have just run install.sh and executed the 3 commands listed at the end, just continue: 
 #GET HADOOP STARTED
 	# When you do run the script, you'll know your Hadoop environment is configured when you see: 
 	#/************************************************************

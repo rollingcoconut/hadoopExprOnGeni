@@ -37,7 +37,7 @@ def main():
 				for i in (c for w,c in group):		#PRINT GROUP THAT MATCHES A SYS.ARGV ENTRY
 					try: print str(i)
 					except: continue
-			currW = searchFor[count + 1]
+				currW = searchFor[count + 1]
 		except: continue
 			
 if __name__ == "__main__":
