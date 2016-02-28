@@ -100,9 +100,7 @@ startHadoop.sh: Script done.
 Now try running the experiment! 
 
 Type something like ./exprStart.sh 1 interst1 interest2
-for ex. "./exprStart.sh 1 apples alice" 
-
-NOTE: To make the experiment portable, the corpus is reduced words starting with a. So you need to give the experiment your favortite 'a' words.
+for ex. "./exprStart.sh 1 frog prince" 
 
 NOTE: Also don't forget to enter a number between the scriptname and your interests. 
 This number represents the factor to increase the logical block size a map job works on." 
