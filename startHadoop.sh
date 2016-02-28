@@ -23,6 +23,7 @@ Get to where you need to be then re-run the script.
 read response
 [ "$response" != "y" ] &&  exit 1 
 
+#CHANGE REPLICATION FACTOR
 cd /home/hadoop/hadoop-2.7.1/etc/hadoop/
 read -d '' line<<"EOF"
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="configuration.xsl"?><configuration><property><name>dfs.replication</name><value>1</value></property><property><name>dfs.name.dir</name><value>file:///home/hadoop/hadoopdata/hdfs/namenode</value></property><property><name>dfs.data.dir</name><value>file:///home/hadoop/hadoopdata/hdfs/datanode</value></property></configuration>
@@ -33,6 +34,7 @@ echo $line > hdfs-site.xml
 
 sleep 3
 
+#FORMAT HADOOP
 cd /home/hadoop
 hdfs namenode -format
 start-dfs.sh
