@@ -38,7 +38,7 @@ echo "install.sh: Moving Gutenberg file to /home/hadoop"
 echo "install.sh: Unzipping Gutenberg file needed for exprStart.sh"
 echo "install.sh: (this will take a while)"
 wget https://nyu.box.com/shared/static/kbzerbhp2mjktamvrmpiazikg58568ho.zip
-unzip -kbzerbhp2mjktamvrmpiazikg58568ho.zip -d /home/hadoop
+unzip kbzerbhp2mjktamvrmpiazikg58568ho.zip -d /home/hadoop
 
 #GET INSTALL WEBSERVER
 echo "install.sh: Installing webserver"
