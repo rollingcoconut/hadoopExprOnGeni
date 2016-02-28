@@ -8,7 +8,7 @@
 #       words should not be repeated
 ########################################
 
-echo "exprStart:YOU ARE RUNNING THE BOOK REC SYSTEM WITH THE TERM FREQ ALGORITHM. TO GET MORE ACCURATE RESULTS USE THE SCRIPT EMPLOYING THE TF.IDF ALGORITM."
+echo "exprStart:YOU ARE RUNNING THE BOOK REC SYSTEM WITH THE TERM FREQ ALGORITHM."
 
 auxFolder=$(pwd)/AUX_FILES   # 	PATH TO AUX_FILES 
 
