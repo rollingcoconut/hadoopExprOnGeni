@@ -1,13 +1,5 @@
-Feb. 20, 2016
+Feb. 27, 2016
 A HADOOP POWERED EXPERIMENT ON GENI! 
-
-
-MAKE THESES COMMENTS: Stuck at 0 0 if route errora
--what to do it cancel job
-
-
-
-
 
 ##################################################
 GETTING STARTED: FOR THE GENI RESEARCHER
@@ -37,21 +29,12 @@ STEPS
 4. Now you'll see a directory called hadoopExprOnGeni. CD into it and execute the install script:
 		sudo ./install.sh
 
-NOTE ON STEP 4: The script is interactive
-	You will be prompted to download the following linux tools:
-	bc, httpd (and dependencies), bzip2. 
-	You should download the tools for the experiment to work as expcted.
-NOTE: You will also be asked if you want to start the machine's webserver. 
-	You should in order to see your results optimized in HTTP.
-	If you choose not to turn it on you can always turn it on later by typing: 
-			sudo serverice httpd start
-
 5. 	Become the hadoop user, cd to /home/hadoop, and execute hadoopStart.sh
 	to configure your hadoop environment. 
 	Type:
 		sudo su hadoop -
 		cd /home/hadoop
-		./startHadoop.sh
+		./startHadoop.sh	<--- (see NOTES)
 
 ##################################################
 RUN THE EXPERIMENT!
@@ -59,14 +42,18 @@ RUN THE EXPERIMENT!
 You are now ready to run experiment script: ./exprStart.sh. 
 Make sure you are hadoop@master, and that your working directory is /home/hadoop.
 
-Example experiment run:  "./exprStart.sh 1 apples alice"
+Example experiment run:  "./exprStart.sh 1 frog bear"
 
 (This number btw the scriptname and list of interests represents the factor  by which to
 to increase the logical block size a map job works on.)
 
-**A Restriction: To make the experiment modular, restrict the keywords you enter, 
-here apples and alice to words beginning with the letter A. 
-
-Entering keywords beginning with other letters will not return any results.  
-
 Finally, just go to your machines IP address to see your recommendations.
+
+
+##################################################
+NOTES: Stuck at 0%?
+##################################################
+1)It has been observed that occassionally while executing "./startHadoop.sh" your Hadoop environment may indicate that worker-0 or worker-1 has encountered a routing error. If this is the case, your MapReduce will get stuck at 0% 0%. Delete your resources and start the experiment again if you notice your job not starting. 
+
+2)If you interrupt your MapReduce run, the next time you run "exprStart.sh" your job may be stuck at 0%. This can be resolved by following the steps outlined in "restartYARN.sh"
+
