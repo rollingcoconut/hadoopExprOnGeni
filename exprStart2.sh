@@ -27,7 +27,7 @@ fi
 echo "exprStart: Your search terms have been stemmed to the following:"
 auxFolder=$(pwd)/AUX_FILES   #  PATH TO AUX_FILES 
 $auxFolder/showNorm.py $*
-sleep 3
+sleep 1
 ret=$?
 if [ $ret -ne 0 ] ; then
         echo "exprStart: quit because of either input's syntax, length; or factorRange not number.  EX: ./exprStart.sh 1 frogs" ; exit 1
@@ -61,7 +61,7 @@ yarn jar \
 	/home/hadoop/hadoop-2.7.1/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar    \
 	-D mapred.min.split.size=$finalInputFileSize \
 	-files ./AUX_FILES/mapperv2.py,./AUX_FILES/reducerv2.py,AUX_FILES/nltk.mod   \
-	-mapperv2 "mapperv2.py $*"  -reducer "reducerv2.py $#" \
+	-mapper "mapperv2.py $*"  -reducer "reducerv2.py $#" \
 	-input /stopNStemmedAll -output  /$outputFile
 
 
