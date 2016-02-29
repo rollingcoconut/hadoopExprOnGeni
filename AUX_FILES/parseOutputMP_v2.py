@@ -44,7 +44,7 @@ def main():
 	
 	                # Constitute url if isurl
 	                if isurl:
-	                        url = ''.join(["http://www.gutenberg.org/cache/epub/",filename,"/pg",filename,".txt"])
+	                        url = ''.join(["http://www.gutenberg.org/ebooks/",filename])
 	
 	                # print bookname
 	                check=list(bookname)
