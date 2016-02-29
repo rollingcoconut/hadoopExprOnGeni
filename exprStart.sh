@@ -16,15 +16,21 @@ auxFolder=$(pwd)/AUX_FILES   # 	PATH TO AUX_FILES
 #$(pwd)/AUX_FILES/testInputBash $*
 #$auxFolder/testInputBash.sh $*
 
-ret=$?
-if [ $ret -ne 0 ] ; then
-        echo "exprStart: quit because of either input's syntax, length; or factorRange not number.  EX: ./exprStart.sh 1 frogs" ; exit 1
-fi
 
 #Test if factorToEnlargeInputSplit is integer
 re='^[0-9]+$'
 if ! [[ $1 =~ $re ]] ; then
    echo "exprStart quit because factorToIncreaseInputSplit not integer. EX: ./exprStart.sh 1 frogs" ; exit 1
+fi
+
+#Show user the stems of their search terms
+echo "exprStart: Your search terms have been stemmed to the following:"
+auxFolder=$(pwd)/AUX_FILES   #  PATH TO AUX_FILES 
+$auxFolder/showNorm.py $*
+sleep 1
+ret=$?
+if [ $ret -ne 0 ] ; then
+        echo "exprStart: quit because of either input's syntax, length; or factorRange not number.  EX: ./exprStart.sh 1 frogs" ; exit 1
 fi
 
 #To enable the unix sort you need the right encoding
@@ -46,7 +52,7 @@ outputFileDNE=$?         	# GET EXIT CODE FORM testDate
 if [ $outputFileDNE -ne 0 ] ; then
         echo "exprStart:Someone starting prgm at same second. Try again" ; exit 1
 fi
-echo "exprStart: program will now execute hadoop mapreduce job" 
+echo "exprStart: PROGRAM WILL NOW EXECUTE HADOOP MAPREDUCE JOB" 
 echo "exprStart: input split size is: " $initInputFileSize 
 echo "exprStart: mapred.min.split.size is " $finalInputFileSize 
 
@@ -54,7 +60,8 @@ echo "exprStart: mapred.min.split.size is " $finalInputFileSize
 yarn jar \
 	/home/hadoop/hadoop-2.7.1/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar    \
 	-D mapred.min.split.size=$finalInputFileSize \
-	-files ./AUX_FILES/mapper.py,./AUX_FILES/reducer.py,AUX_FILES/nltk.mod   -mapper "mapper.py $*"  -reducer reducer.py  \
+	-files ./AUX_FILES/mapper.py,./AUX_FILES/reducer.py,AUX_FILES/nltk.mod   \
+	-mapper "mapper.py $*"  -reducer "reducer.py $#" \
 	-input /stopNStemmedAll -output  /$outputFile
 
 
@@ -64,15 +71,9 @@ read -d '' indexBeg<<"EOF"
 EOF
 echo $indexBeg > $auxFolder/index.html
 
-#read -d '' indexEND<<"EOF"
-#</table> </br> <span class="byline">Scores are relative to either TF.IDF, or Term Frequency  algorithm</span> </div> </div>	  </div> </div> </div>   <div id="copyright" class="container"> <p>&copy; In collaboration with NYU-Tandon's GENI MOOC Project. All rights reserved. |  <a href=" https://www.flickr.com/photos/lmsantana/4670815292/in/photolist-87K9E9-hA2yZP-zbAfM-woXyb-ozC9Ym-qRLbcL-BvZYg-kmz5P5-67NFxz-2PJ8PE-2PDFXi-gTLzfZ-sMrw3-Q5kVp-59Nxjk-67ajaN-e6svuo-8UbZ8T-FJAz8-qwdUey-9qAAK4-6pSZEY-8HywJy-nfYoa-xQ9VX-fP8FzJ-aDEdmU-khHG9H-rVSRTV-7CQsWR-815zjn-DWU3r-6sqzPc-9CgKK2-9gvoT1-ke9gwQ-7VLtGQ-68qn8v-ubcVZ6-6CxwJQ-8ur4Pb-iggDgF-pztehv-6V1qP4-hR3c8i-vdsNA3-6FEEqE-dEXwip-fwYe1f-bNNaTB">Photo</a> by Lucas Santana /<a href="https://creativecommons.org/licenses/by/2.0/legalcode"> CC BY 2.0</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p> </div> </body> </html>   
-#EOF
-
 read -d '' indexEND<<"EOF"
-</table> </br> <span class="byline">Scores are relative to either TF.IDF, or Term Frequency  algorithm</span> </div> </div>   </div> </div> </div>   <div id="copyright" class="container"> <p>&copy; In collaboration with NYU-Tandon's GENI MOOC Project.  <a href="https://creativecommons.org/licenses/by/2.0/legalcode"> CC BY 2.0</a> |  <a href=" https://www.flickr.com/photos/lmsantana/4670815292/in/photolist-87K9E9-hA2yZP-zbAfM-woXyb-ozC9Ym-qRLbcL-BvZYg-kmz5P5-67NFxz-2PJ8PE-2PDFXi-gTLzfZ-sMrw3-Q5kVp-59Nxjk-67ajaN-e6svuo-8UbZ8T-FJAz8-qwdUey-9qAAK4-6pSZEY-8HywJy-nfYoa-xQ9VX-fP8FzJ-aDEdmU-khHG9H-rVSRTV-7CQsWR-815zjn-DWU3r-6sqzPc-9CgKK2-9gvoT1-ke9gwQ-7VLtGQ-68qn8v-ubcVZ6-6CxwJQ-8ur4Pb-iggDgF-pztehv-6V1qP4-hR3c8i-vdsNA3-6FEEqE-dEXwip-fwYe1f-bNNaTB">Photo</a> by Lucas Santana /<a href="https://creativecommons.org/licenses/by/2.0/legalcode"> CC BY 2.0</a> | Design by <a href="http://templated.co/entryway" rel="nofollow">TEMPLATED</a>.</p> </div> </body> </html>   
+</table> </br> <span class="byline">Scores are relative to either TF.IDF, or Term Frequency  algorithm</span> </div> </div>	  </div> </div> </div>   <div id="copyright" class="container"> <p>&copy; In collaboration with NYU-Tandon's GENI MOOC Project. All rights reserved. |  <a href=" https://www.flickr.com/photos/lmsantana/4670815292/in/photolist-87K9E9-hA2yZP-zbAfM-woXyb-ozC9Ym-qRLbcL-BvZYg-kmz5P5-67NFxz-2PJ8PE-2PDFXi-gTLzfZ-sMrw3-Q5kVp-59Nxjk-67ajaN-e6svuo-8UbZ8T-FJAz8-qwdUey-9qAAK4-6pSZEY-8HywJy-nfYoa-xQ9VX-fP8FzJ-aDEdmU-khHG9H-rVSRTV-7CQsWR-815zjn-DWU3r-6sqzPc-9CgKK2-9gvoT1-ke9gwQ-7VLtGQ-68qn8v-ubcVZ6-6CxwJQ-8ur4Pb-iggDgF-pztehv-6V1qP4-hR3c8i-vdsNA3-6FEEqE-dEXwip-fwYe1f-bNNaTB">Photo</a> by Lucas Santana /<a href="https://creativecommons.org/licenses/by/2.0/legalcode"> CC BY 2.0</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p> </div> </body> </html>   
 EOF
-
-
 
 #POPULATE HTML PAGE WITH FORMATTED MAPREDUCE JOB OUTPUT
 tempRes=$(hadoop fs -cat /$outputFile/part-00000 | sort -r | head -10 | ./AUX_FILES/parseOutputMP_v2.py | uniq  | ./AUX_FILES/createHTMLpage.sh)
@@ -84,8 +85,8 @@ tempRes=$(hadoop fs -cat /$outputFile/part-00000 | sort -r | head -10 | ./AUX_FI
 #FINISH CREATING HTML PAGE
 echo $tempRes >> $auxFolder/index.html
 echo $indexEND >> $auxFolder/index.html
-if [ $? -eq 0 ]; then echo "exprSTART: HTML PAGE CREATED" ; 
-else echo "SOMETHING WENT WRONG WHILE CREATING HTML PAGE...";  exit 1 ; fi
+if [ $? -eq 0 ]; then echo "exprSTART: html page created" ; 
+else echo " something went wrong while creating html page...";  exit 1 ; fi
 
 
 #PLACE HTML FILE APPROPRIATELY

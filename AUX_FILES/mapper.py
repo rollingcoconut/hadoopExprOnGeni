@@ -3,7 +3,8 @@
 ########################################
 # mapper.py
 # GENI HADOOP MOOC 
-# MAPPER OUTPUT => (lines in data whose first entry matches user interst) 
+# MAPPER INPUT => [word.bookid.wc count]
+# MAPPER OUTPUT => [bookid wc count]
 ########################################
 
 #THE DATA HAS BEEN STEMMED, THEREFORE THE USER INPUT SHOULD ALSO BE STEMMED AND NATRUAL LANG PACKAGES HAVE BEEN IMPORTED 
@@ -26,19 +27,20 @@ def read_input(file):
 	for line in file: yield line.rstrip().split('.', 1)
 
 def main():
+	"""**A Note on Technique:*
+	Iterating through the sys.argv array while simultaneously reading the gutenberg doc file is a logical way 
+	to avoid the redundancy of 2 for loops. However, this technique acted weirdly here, I believe due 
+	to state required by the iterator. Therefore the 'is word in sys.argv' method was used"""
+
 	data = read_input(sys.stdin)   					#GET LINE FROM GENERATOR
-	newSysArgv = [stemAndCtrlRemove(term) for term in sys.argv] 	#NORMALIZE USER INPUT
-	searchFor = [x for i, x in enumerate(newSysArgv)]
-	count = 1							#ITERATE THROUGH SYS.ARGV
-	currW = searchFor[count]
+													#NORMALIZED RELEVEANT USER SEARCH TERMS 
+	searchFor= sorted([stemAndCtrlRemove(term) for term in sys.argv[2:]]) 
 	for current_word, group in groupby(data, itemgetter(0)):	#GROUP DATA TO LESSEN LINE CHECKS
-		try:
-			if (current_word == currW):
-				for i in (c for w,c in group):		#PRINT GROUP THAT MATCHES A SYS.ARGV ENTRY
-					try: print str(i)
-					except: continue
-				currW = searchFor[count + 1]
-		except: continue
+		if current_word in searchFor:
+			for i in (c for w,c in group):			#PRINT GROUP THAT MATCHES A SYS.ARGV ENTRY
+				try: 
+					print  str(i).replace('.',"\t")
+				except: continue
 			
 if __name__ == "__main__":
 	main()
