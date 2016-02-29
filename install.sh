@@ -14,16 +14,6 @@
 echo "install.sh: Hello, "$USER".  This install script will get your GENI machine ready to run a Hadoop powered experiment."
 sleep 4
 
-div="
-
-
-
-
-
-
--------------------------------------------------- 
-"
-
 #MOVE EXPERIMENT FILES TO RIGHT PLACE AND CHANGE PERMISSIONS
 chmod -R 777  $(pwd)
 	cp -r $(pwd)/AUX_FILES /home/hadoop	 #MOVE EXPERIMENT FILES TO RIGHT PLACE
@@ -68,7 +58,6 @@ echo  "install.sh: Webserver started on this VM"
 sleep 1
 
 #TELL USER SCRIPT DONE
-echo $div
 echo "install.sh: Script done. Now please run do the following: 
 1) sudo su hadoop -
 2) cd /home/hadoop
