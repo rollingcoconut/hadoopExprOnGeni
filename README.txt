@@ -1,3 +1,8 @@
+UPDATE: 
+This experiment was featured at the the 2016  GENI Regional Workshop at Arizona State University. 
+https://witestlab.poly.edu/blog/a-hadoop-powered-book-recommendation-system/
+
+
 Feb. 27, 2016
 A HADOOP POWERED EXPERIMENT ON GENI! 
 
